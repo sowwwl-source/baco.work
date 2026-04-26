@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+        <style>
+            /* Sensorialité flottante centrale */
+            .sensorialite-bg {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 0;
+                width: 60vw;
+                max-width: 900px;
+                opacity: 0.22;
+                filter: blur(8px) saturate(1.2);
+                pointer-events: none;
+                mix-blend-mode: lighten;
+            }
+            main, header, section, footer {
+                position: relative;
+                z-index: 1;
+            }
+        </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guérande Cosmétiques | Baco.work</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- DESIGN SYSTEM & VARIABLES --- */
+        :root {
+            /* Palette Extraite des équivalences Pantone */
+            --bleu-ocean: #2B3A55;
+            --bleu-eaux-meres: #4A627E;
+            --gris-mineral: #7D8A92;
+            --vert-celadon: #B5C9BB;
+            --terracotta: #D49A89;
+            --sable: #E8D5B5;
+            --blanc-craie: #F7F7F7;
+            
+            --font-titre: 'Playfair Display', serif;
+            --font-texte: 'Inter', sans-serif;
+        }
+
+        /* --- RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-texte);
+            color: var(--bleu-ocean);
+            background-color: var(--blanc-craie);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 { font-family: var(--font-titre); font-weight: 600; }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* --- UTILITAIRES ANIMATION --- */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* --- HERO HEADER --- */
+        #hero {
+            height: 100vh;
+            background-image: linear-gradient(rgba(43, 58, 85, 0.4), rgba(43, 58, 85, 0.6)), url('media/iswanto-arif-oj74pftryi0-unsplash.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        .hero-logo { font-family: var(--font-titre); font-size: 4rem; margin-bottom: 10px; letter-spacing: 2px;}
+        .hero-tagline { font-size: 1.2rem; font-style: italic; font-weight: 300; margin-bottom: 40px; letter-spacing: 1px;}
+        .cta-btn {
+            padding: 15px 30px;
+            background-color: transparent;
+            border: 1px solid white;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .cta-btn:hover { background-color: white; color: var(--bleu-ocean); }
+
+        /* --- MANIFESTE (Scrollytelling basique) --- */
+        #manifeste {
+            position: relative;
+            min-height: 80vh;
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('media/nasa-i9w4uypu-s-unsplash.jpg');
+            background-attachment: fixed; /* Effet Parallax */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        #manifeste h2 { font-size: 3.5rem; margin-bottom: 20px; text-transform: uppercase;}
+        #manifeste p { font-size: 1.5rem; max-width: 800px; margin: 0 auto; font-family: var(--font-titre); font-style: italic;}
+
+        /* --- VISION --- */
+        #vision { padding: 100px 5%; background-color: var(--blanc-craie); }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
+        .section-header h2 { font-size: 2.5rem; color: var(--bleu-eaux-meres); margin-bottom: 20px; }
+        
+        .grid-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .grid-vision img { border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+        /* --- TERRITOIRE (Palettes de la nature) --- */
+        #territoire { padding: 100px 5%; background-color: var(--sable); }
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .masonry-item { overflow: hidden; position: relative; border-radius: 4px;}
+        .masonry-item img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            transition: transform 0.5s ease;
+        }
+        .masonry-item:hover img { transform: scale(1.05); }
+
+        /* --- STRATÉGIE --- */
+        #strategie { padding: 100px 5%; display: flex; flex-wrap: wrap; gap: 50px; align-items: center; background: url('media/fond-mer.jpg') center/cover; color: white;}
+        .strat-text { flex: 1; min-width: 300px; }
+        .strat-text h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .strat-image { flex: 1; min-width: 300px; }
+
+        /* --- GAMME PRODUITS --- */
+        #gamme-produits { padding: 100px 5%; background-color: var(--blanc-craie); }
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-bottom: 4px solid var(--vert-celadon);
+            transition: transform 0.3s ease;
+        }
+        .card:hover { transform: translateY(-10px); }
+        .card img { height: 250px; object-fit: contain; margin: 0 auto 20px; }
+        .card h3 { font-family: var(--font-texte); font-size: 1.2rem; margin-bottom: 10px; color: var(--bleu-eaux-meres);}
+
+        /* Footer basique */
+        footer { background-color: var(--bleu-ocean); color: white; text-align: center; padding: 40px 20px; }
+
+        @media (max-width: 768px) {
+            .grid-vision { grid-template-columns: 1fr; }
+            .hero-logo { font-size: 3rem; }
+            #manifeste h2 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Crème Sensorialité flottante centrale -->
+    <img src="media/magnifics_upscale-à-09.39.44.jpg" alt="Crème Sensorialité" class="sensorialite-bg" aria-hidden="true">
+
+    <header id="hero">
+        <h1 class="hero-logo fade-in">guérande</h1>
+        <p class="hero-tagline fade-in">science & soin thalassiques</p>
+        <a href="#manifeste" class="cta-btn fade-in">Découvrir la vision</a>
+    </header>
+
+    <section id="manifeste">
+        <div class="fade-in">
+            <h2>L'océan est notre actionnaire</h2>
+            <p>"Nous ne puisons pas dans la nature, nous collaborons avec elle. Face à sa puissance, nous avons choisi l'humilité et le respect."</p>
+        </div>
+    </section>
+
+    <section id="vision">
+        <div class="section-header fade-in">
+            <h2>Aux origines des Eaux-Mères</h2>
+            <p>Depuis des millénaires, l'océan et la terre se rencontrent. Sous l'effet de la lune et des marées, se forment les Salines. Dans ces lieux, naissent des eaux aux propriétés uniques.</p>
+        </div>
+        <div class="grid-vision">
+            <img src="media/charte-graphique-gurande-comstiques.jpg" alt="Visage naturel, douceur" loading="lazy" class="fade-in" onerror="this.src='media/apres.png'">
+            <img src="media/conception-page-projet.jpg" alt="Mains dans le sel, pieds nus" loading="lazy" class="fade-in" onerror="this.src='media/apres.png'">
+        </div>
+    </section>
+
+    <section id="territoire">
+        <div class="section-header fade-in">
+            <h2>Les Palettes de la Nature</h2>
+            <p>Un voyage chromatique à travers les écosystèmes extrêmes des marais salants, sources de notre inspiration graphique et cosmétique.</p>
+        </div>
+        <div class="masonry-grid fade-in">
+            <div class="masonry-item"><img src="media/2024-06-guande-dp-sans-prix--v2-4.png" alt="Palette aquarelle bleu" loading="lazy" onerror="this.src='media/apres.png'"></div>
+            <div class="masonry-item"><img src="media/annonce-presse-2023-n3-imp.jpg" alt="Palette terracotta/rose" loading="lazy" onerror="this.src='media/apres.png'"></div>
+            <div class="masonry-item"><img src="media/fond-mer.jpg" alt="Texture fond marin" loading="lazy" onerror="this.src='media/apres.png'"></div>
+            <div class="masonry-item"><img src="media/capture-décran-2024-04-08-à-10.49.08.jpg" alt="Texture craquelée" loading="lazy" onerror="this.src='media/apres.png'"></div>
+        </div>
+    </section>
+
+    <section id="strategie">
+        <div class="strat-text fade-in">
+            <h2>Du diamant brut au laboratoire</h2>
+            <p>Les ressources des salines sont de véritables pépites. Notre laboratoire étudie ces plantes et algues halophytes, qui vivent dans un milieu extrême et développent un système de défense extraordinaire pour protéger la vitalité de votre peau.</p>
+        </div>
+        <div class="strat-image fade-in">
+            <img src="media/525061648-1186177046880981-3078696164036606391-n.jpg" alt="Ingrédients halophytes, recharge" loading="lazy" onerror="this.src='media/apres.png'">
+        </div>
+    </section>
+
+    <section id="gamme-produits">
+        <div class="section-header fade-in">
+            <h2>L'Écosystème Produit</h2>
+            <p>Conjuguer l'élégance d'un soin premium avec l'authenticité de la terre craquelée et des engagements écologiques forts.</p>
+        </div>
+        <div class="cards-container fade-in">
+            <div class="card">
+                <img src="media/491204653-1100138258818194-1669315162402586685-n.jpg" alt="Sérum jeunesse cellulaire" loading="lazy" onerror="this.src='media/apres.png'">
+                <h3>Sérum Jeunesse</h3>
+                <p>Expertise anti-âge cellulaire.</p>
+            </div>
+            <div class="card">
+                <img src="media/magnifics_upscale-e-recharge.jpg" alt="Eco recharge" loading="lazy" onerror="this.src='media/apres.png'">
+                <h3>Éco-responsabilité</h3>
+                <p>-94% de plastique par recharge.</p>
+            </div>
+            <div class="card">
+                <img src="media/524893804-1186177053547647-8052822903364409943-n.jpg" alt="Sérum ciblé imperfections" loading="lazy" onerror="this.src='media/apres.png'">
+                <h3>Soins Ciblés</h3>
+                <p>Formules Cosmos Organic & Vegan.</p>
+            </div>
+            <div class="card">
+                <img src="media/magnifics_upscale-à-09.39.44.jpg" alt="Texture crème" loading="lazy" onerror="this.src='media/apres.png'">
+                <h3>Sensorialité</h3>
+                <p>L'expérience thalassique sur la peau.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Guérande Cosmétiques x Baco.work | Déployé sur Cloudflare Workers</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const faders = document.querySelectorAll('.fade-in');
+            
+            const appearOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('visible');
+                    appearOnScroll.unobserve(entry.target);
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+            
+            // Smooth scroll pour le bouton du header
+            document.querySelector('.cta-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
