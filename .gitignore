@@ -1,0 +1,6 @@
+# Node modules (if you add tooling)
+node_modules/
+# OS files
+.DS_Store
+# Logs
+npm-debug.log*
