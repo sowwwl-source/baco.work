@@ -1,3 +1,257 @@
+/* --- VARIABLES & CHARTE GRAPHIQUE --- */
+:root {
+	/* Couleurs déduites de la charte */
+	--primary-blue: #2B468B;
+	--light-blue: #7BA4D9;
+	--green: #85B09A;
+	--beige: #E8D5B5;
+	--text-dark: #333333;
+	--bg-light: #FAFAFA;
+	--grey-cta: #7D7D7D;
+
+	/* Typographies */
+	--font-heading: 'Calistoga', serif;
+	--font-sub: 'Playfair Display', serif;
+	--font-body: 'Jost', sans-serif;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: var(--font-body);
+	background-color: var(--bg-light);
+	color: var(--text-dark);
+	line-height: 1.6;
+	padding: 2rem 4rem;
+}
+
+/* --- FIL D'ARIANE --- */
+.breadcrumb {
+	font-family: var(--font-body);
+	text-transform: uppercase;
+	font-size: 0.8rem;
+	letter-spacing: 1px;
+	margin-bottom: 2rem;
+	color: var(--text-dark);
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+	position: relative;
+	width: 100%;
+	height: 60vh;
+	background-color: #EAEAEA; /* Gris en attendant l'image */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	margin-bottom: 4rem;
+	overflow: hidden;
+}
+
+.hero-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 1;
+	opacity: 0.7; /* Pour laisser lire le texte */
+}
+
+.hero-content {
+	position: relative;
+	z-index: 2;
+	color: var(--primary-blue);
+}
+
+.logo-title {
+	font-family: var(--font-heading);
+	font-size: 4rem;
+	margin-bottom: -10px;
+}
+
+.logo-subtitle {
+	font-family: var(--font-body);
+	font-weight: 500;
+	letter-spacing: 4px;
+	font-size: 1rem;
+	margin-bottom: 1rem;
+}
+
+.baseline {
+	font-family: var(--font-sub);
+	font-style: italic;
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
+}
+
+.tags {
+	font-family: var(--font-body);
+	font-size: 0.8rem;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+/* --- CONTENU PRINCIPAL (2 Colonnes) --- */
+.project-details {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 4rem;
+	margin-bottom: 4rem;
+}
+
+.text-block {
+	margin-bottom: 3rem;
+}
+
+.text-block h3, .impact-section h3, .next-project h3 {
+	font-family: var(--font-body);
+	font-size: 1.2rem;
+	font-weight: 500;
+	letter-spacing: 2px;
+	margin-bottom: 1rem;
+	text-transform: uppercase;
+}
+
+.text-block p {
+	font-family: var(--font-body);
+	font-size: 1rem;
+	color: var(--text-dark);
+	font-weight: 300;
+}
+
+.dispositif-list {
+	list-style: none;
+	font-weight: 300;
+}
+
+.dispositif-list li {
+	margin-bottom: 0.5rem;
+	text-transform: uppercase;
+	font-size: 0.9rem;
+	letter-spacing: 1px;
+}
+
+/* --- IMAGES COLONNE DROITE --- */
+.images-right {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.images-right img {
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+	background-color: #EAEAEA;
+	min-height: 250px;
+}
+
+/* --- ZOOM & GALERIE --- */
+.zoom-section {
+	margin-bottom: 4rem;
+}
+
+.zoom-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 2rem;
+	margin-top: 2rem;
+	margin-bottom: 3rem;
+}
+
+.zoom-grid h4 {
+	font-family: var(--font-heading);
+	color: var(--primary-blue);
+	font-size: 1.2rem;
+}
+
+.gallery-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 2rem;
+}
+
+.gallery-grid img {
+	width: 100%;
+	height: auto;
+	background-color: #EAEAEA;
+	min-height: 200px;
+}
+
+/* --- IMPACT --- */
+.impact-section {
+	text-align: center;
+	margin: 4rem 0;
+	padding: 3rem;
+	background-color: var(--primary-blue);
+	color: white;
+}
+
+.impact-section h3 {
+	color: white;
+}
+
+.impact-section p {
+	font-family: var(--font-sub);
+	font-style: italic;
+	font-size: 1.5rem;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+/* --- FOOTER & CTA --- */
+.footer-cta {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 4rem;
+	align-items: end;
+}
+
+.next-project-card img {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	background-color: #EAEAEA;
+	margin-bottom: 1rem;
+}
+
+.cta-box {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.cta-button {
+	background-color: var(--grey-cta);
+	color: white;
+	padding: 2rem 3rem;
+	text-decoration: none;
+	font-family: var(--font-body);
+	font-size: 1.5rem;
+	text-transform: lowercase;
+	display: inline-block;
+	transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+	background-color: var(--primary-blue);
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+	.project-details, .footer-cta, .zoom-grid, .gallery-grid {
+		grid-template-columns: 1fr;
+	}
+	body {
+		padding: 1rem;
+	}
+}
 body {margin:0;padding:0;font-family:'Jost',Arial,sans-serif;background:#fff;color:#23253c;}
 .breadcrumb{padding:1.5rem 2rem 0 2rem;font-size:1rem;color:#888;}
 .hero-section{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:2rem 0 0 0;gap:2rem;}
