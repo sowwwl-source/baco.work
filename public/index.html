@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Guérande Cosmétiques | Baco.work</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+	<!-- Crème Sensorialité flottante centrale -->
+	<img src="media/magnifics_upscale-à-09.39.44.jpg" alt="Crème Sensorialité" class="sensorialite-bg" aria-hidden="true">
+	<header id="hero">
+		<h1 class="hero-logo fade-in">guérande</h1>
+		<p class="hero-tagline fade-in">science & soin thalassiques</p>
+		<a href="#manifeste" class="cta-btn fade-in">Découvrir la vision</a>
+	</header>
+	<section id="manifeste">
+		<div class="fade-in">
+			<h2>L'océan est notre actionnaire</h2>
+			<p>"Nous ne puisons pas dans la nature, nous collaborons avec elle. Face à sa puissance, nous avons choisi l'humilité et le respect."</p>
+		</div>
+	</section>
+	<section id="vision">
+		<div class="section-header fade-in">
+			<h2>Aux origines des Eaux-Mères</h2>
+			<p>Depuis des millénaires, l'océan et la terre se rencontrent. Sous l'effet de la lune et des marées, se forment les Salines. Dans ces lieux, naissent des eaux aux propriétés uniques.</p>
+		</div>
+		<div class="grid-vision">
+			<img src="media/charte-graphique-gurande-comstiques.jpg" alt="Visage naturel, douceur" loading="lazy" class="fade-in" onerror="this.src='media/apres.png'">
+			<img src="media/conception-page-projet.jpg" alt="Mains dans le sel, pieds nus" loading="lazy" class="fade-in" onerror="this.src='media/apres.png'">
+		</div>
+	</section>
+	<section id="territoire">
+		<div class="section-header fade-in">
+			<h2>Les Palettes de la Nature</h2>
+			<p>Un voyage chromatique à travers les écosystèmes extrêmes des marais salants, sources de notre inspiration graphique et cosmétique.</p>
+		</div>
+		<div class="masonry-grid fade-in">
+			<div class="masonry-item"><img src="media/2024-06-guande-dp-sans-prix--v2-4.png" alt="Palette aquarelle bleu" loading="lazy" onerror="this.src='media/apres.png'"></div>
+			<div class="masonry-item"><img src="media/annonce-presse-2023-n3-imp.jpg" alt="Palette terracotta/rose" loading="lazy" onerror="this.src='media/apres.png'"></div>
+			<div class="masonry-item"><img src="media/fond-mer.jpg" alt="Texture fond marin" loading="lazy" onerror="this.src='media/apres.png'"></div>
+			<div class="masonry-item"><img src="media/Capture-d’écran-2026-04-08-à-10.49.08.jpg" alt="Texture craquelée" loading="lazy" onerror="this.src='media/apres.png'"></div>
+		</div>
+	</section>
+	<section id="strategie">
+		<div class="strat-text fade-in">
+			<h2>Du diamant brut au laboratoire</h2>
+			<p>Les ressources des salines sont de véritables pépites. Notre laboratoire étudie ces plantes et algues halophytes, qui vivent dans un milieu extrême et développent un système de défense extraordinaire pour protéger la vitalité de votre peau.</p>
+		</div>
+		<div class="strat-image fade-in">
+			<img src="media/525061648-1186177046880981-3078696164036606391-n.jpg" alt="Ingrédients halophytes, recharge" loading="lazy" onerror="this.src='media/apres.png'">
+		</div>
+	</section>
+	<section id="gamme-produits">
+		<div class="section-header fade-in">
+			<h2>L'Écosystème Produit</h2>
+			<p>Conjuguer l'élégance d'un soin premium avec l'authenticité de la terre craquelée et des engagements écologiques forts.</p>
+		</div>
+		<div class="cards-container fade-in">
+			<div class="card">
+				<img src="media/491204653-1100138258818194-1669315162402586685-n.jpg" alt="Sérum jeunesse cellulaire" loading="lazy" onerror="this.src='media/apres.png'">
+				<h3>Sérum Jeunesse</h3>
+				<p>Expertise anti-âge cellulaire.</p>
+			</div>
+			<div class="card">
+				<img src="media/magnifics_upscale-e-recharge.jpg" alt="Eco recharge" loading="lazy" onerror="this.src='media/apres.png'">
+				<h3>Éco-responsabilité</h3>
+				<p>-94% de plastique par recharge.</p>
+			</div>
+			<div class="card">
+				<img src="media/524893804-1186177053547647-8052822903364409943-n.jpg" alt="Sérum ciblé imperfections" loading="lazy" onerror="this.src='media/apres.png'">
+				<h3>Soins Ciblés</h3>
+				<p>Formules Cosmos Organic & Vegan.</p>
+			</div>
+			<div class="card">
+				<img src="media/magnifics_upscale-à-09.39.44.jpg" alt="Texture crème" loading="lazy" onerror="this.src='media/apres.png'">
+				<h3>Sensorialité</h3>
+				<p>L'expérience thalassique sur la peau.</p>
+			</div>
+		</div>
+	</section>
+	<footer>
+		<p>© 2026 Guérande Cosmétiques x Baco.work | Déployé sur Cloudflare Workers</p>
+	</footer>
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+			const faders = document.querySelectorAll('.fade-in');
+			const appearOptions = {
+				threshold: 0.15,
+				rootMargin: "0px 0px -50px 0px"
+			};
+			const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+				entries.forEach(entry => {
+					if (!entry.isIntersecting) return;
+					entry.target.classList.add('visible');
+					appearOnScroll.unobserve(entry.target);
+				});
+			}, appearOptions);
+			faders.forEach(fader => {
+				appearOnScroll.observe(fader);
+			});
+			// Smooth scroll pour le bouton du header
+			document.querySelector('.cta-btn').addEventListener('click', function(e) {
+				e.preventDefault();
+				document.querySelector(this.getAttribute('href')).scrollIntoView({
+					behavior: 'smooth'
+				});
+			});
+		});
+	</script>
+</body>
+</html>
