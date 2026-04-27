@@ -1,422 +1,170 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'Œuvre | Baco</title>
-    
-    <!-- Polices Google -->
+    <title>Guérande Cosmétiques | Baco.work</title>
+    <meta
+        name="description"
+        content="Guérande Cosmétiques, entre eaux-mères, actifs marins et matière sensible. Une lecture éditoriale sobre, photographique et plein cadre."
+    >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS (CDN pour le One-Shot) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
-                    colors: {
-                        baco: {
-                            dark: '#050505',
-                            accent: '#6366f1', // Indigo
-                            glow: '#0ea5e9', // Sky blue
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Styles personnalisés pour la magie (Glassmorphism & Scroll) -->
-    <style>
-        body {
-            background-color: #050505;
-            color: #f8fafc;
-            overflow-x: hidden;
-        }
-
-        /* Le fond magique en canvas */
-        #magic-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            pointer-events: none; /* Laisse passer les clics vers le contenu */
-        }
-
-        /* Effet de verre dépoli */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Animations d'apparition au scroll */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Curseur personnalisé */
-        .custom-cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 30px;
-            height: 30px;
-            border: 2px solid rgba(99, 102, 241, 0.5);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 9999;
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
-            mix-blend-mode: screen;
-        }
-        
-        .custom-cursor.hover {
-            width: 50px;
-            height: 50px;
-            background-color: rgba(99, 102, 241, 0.2);
-        }
-
-        /* Scrollbar stylisée */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #050505; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #333; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #6366f1; 
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="antialiased selection:bg-baco-accent selection:text-white relative">
-
-    <!-- Curseur interactif -->
-    <div class="custom-cursor hidden md:block" id="cursor"></div>
-
-    <!-- Background magique interactif -->
-    <canvas id="magic-canvas"></canvas>
-
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-panel border-b-0 border-white/10 transition-all duration-300 py-4" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold tracking-tighter interactive-element">
-                BACO<span class="text-baco-accent">.</span>
-            </a>
-            <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-300">
-                 <a href="#vision" class="hover:text-white transition-colors interactive-element">La Vision</a>
-                 <a href="#le-sujet" class="hover:text-white transition-colors interactive-element">Le Sujet</a>
-                 <a href="#contact" class="hover:text-white transition-colors interactive-element">Contact</a>
-                 <a href="brand-guide.html" class="hover:text-baco-glow transition-colors interactive-element" target="_blank">Brand Guide</a>
+<body>
+    <header class="masthead" id="top">
+        <div class="masthead__grid">
+            <div>
+                <p class="eyebrow">Baco.work présente</p>
+                <h1>Guérande Cosmétiques</h1>
             </div>
-            <!-- Bouton mobile basique -->
-            <button class="md:hidden text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="min-h-screen flex items-center justify-center relative px-6">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-baco-dark/50 to-baco-dark pointer-events-none"></div>
-        
-        <div class="text-center z-10 max-w-4xl mx-auto reveal mt-20">
-            <p class="text-baco-accent font-medium tracking-widest uppercase mb-4 text-sm md:text-base">Une exploration de qualité</p>
-            <h1 class="text-5xl md:text-8xl font-black mb-6 leading-tight tracking-tight">
-                L'Œuvre de <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-baco-accent to-baco-glow font-serif italic">l'ami Baco</span>
-            </h1>
-            <p class="text-lg md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto font-light">
-                Plongez dans le sujet traité au cœur du Drive. Une synthèse magistrale, des connexions inattendues, et une vision unique.
-            </p>
-            <a href="#le-sujet" class="interactive-element inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-200 glass-panel rounded-full hover:bg-white/10 hover:scale-105">
-                Découvrir le contenu
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-            </a>
+            <div class="masthead__copy">
+                <p>
+                    Une lecture plus calme et plus ample du projet&nbsp;: pas de
+                    planches, pas de compositions chargées, seulement des images
+                    plein écran et un texte éditorial qui laisse respirer la matière.
+                </p>
+                <a class="jump" href="#origine">Entrer dans les salines</a>
+            </div>
         </div>
     </header>
 
-    <!-- Section Vision (Mise en bouche) -->
-    <section id="vision" class="py-24 px-6 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="reveal">
-                    <h2 class="text-3xl md:text-5xl font-bold mb-6">L'étincelle <span class="text-baco-glow">créative</span>.</h2>
-                    <p class="text-gray-400 text-lg mb-6 leading-relaxed">
-                        Ce travail n'est pas qu'une simple compilation de données. C'est une réflexion profonde, tissée avec soin. Baco a su extraire l'essence du sujet pour la restituer d'une manière qui résonne.
-                    </p>
-                    <p class="text-gray-400 text-lg leading-relaxed">
-                        Ici, tu peux insérer un texte d'introduction issu de ton Drive. Explique le contexte, l'origine de l'idée, et pourquoi ce document est si précieux.
-                    </p>
-                </div>
-                <div class="glass-panel p-8 md:p-12 rounded-3xl reveal transform hover:rotate-1 transition-transform duration-500">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-baco-accent to-baco-glow mb-6 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.82 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.496 1.509 1.333 1.509 2.316V18" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-serif italic mb-4">"Une clarté d'esprit stupéfiante"</h3>
-                    <p class="text-gray-300 italic">
-                        — Remplace cette citation par une phrase marquante tirée du travail de Baco. Laisse la magie opérer à travers ses propres mots.
-                    </p>
-                </div>
+    <main>
+        <section class="panel">
+            <img
+                src="media/iswanto-arif-OJ74pFtrYi0-unsplash.jpg"
+                alt="Vue aérienne d'une vague se déposant sur une plage claire."
+                loading="eager"
+            >
+        </section>
+
+        <section class="copy-block" id="origine">
+            <div class="copy-block__lead">
+                <p class="eyebrow">Origine</p>
+                <h2>Une cosmétique née d’un milieu extrême.</h2>
             </div>
-        </div>
-    </section>
-
-    <!-- Section Le Sujet (Le cœur du Drive) -->
-    <section id="le-sujet" class="py-32 px-6 relative z-10 bg-gradient-to-b from-transparent via-black/80 to-transparent">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center reveal mb-20">
-                <h2 class="text-4xl md:text-6xl font-black mb-6">Le Cœur du <span class="font-serif italic text-transparent bg-clip-text bg-gradient-to-r from-baco-accent to-purple-500">Sujet</span></h2>
-                <p class="text-xl text-gray-400 max-w-2xl mx-auto">Explorez les différentes facettes du document. Chaque carte ci-dessous peut représenter un chapitre, un concept clé ou une section de ton Drive.</p>
+            <div class="copy-block__body">
+                <p>
+                    Les eaux-mères sont associées à l’action de végétaux et de
+                    sédiments marins choisis pour leur effet sur la vitalité de
+                    la peau. Ici, la mer n’est pas un décor&nbsp;: elle est la base
+                    active du récit.
+                </p>
+                <p>
+                    Argile, plantes, algues, sel. La force du projet tient dans
+                    cette chaîne courte et lisible, entre territoire, extraction
+                    et soin.
+                </p>
             </div>
+        </section>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Carte 1 -->
-                <div class="glass-panel p-8 rounded-2xl reveal hover:-translate-y-2 transition-all duration-300 interactive-element group">
-                    <h3 class="text-xl font-bold mb-3 group-hover:text-baco-accent transition-colors">Chapitre I : L'Origine</h3>
-                    <p class="text-gray-400 text-sm mb-6">Insère ici le résumé de la première grande idée. Le design s'adapte au contenu pour garder une harmonie parfaite.</p>
-                    <div class="h-1 w-full bg-white/10 rounded overflow-hidden">
-                        <div class="h-full bg-baco-accent w-1/3 group-hover:w-full transition-all duration-700"></div>
-                    </div>
-                </div>
+        <section class="panel panel--soft">
+            <img
+                src="media/525061648-1186177046880981-3078696164036606391-n.jpg"
+                alt="Texture de crème blanche étalée en larges nappes sur un fond bleu pâle."
+                loading="lazy"
+            >
+        </section>
 
-                <!-- Carte 2 -->
-                <div class="glass-panel p-8 rounded-2xl reveal hover:-translate-y-2 transition-all duration-300 interactive-element group" style="transition-delay: 100ms;">
-                    <h3 class="text-xl font-bold mb-3 group-hover:text-baco-glow transition-colors">Chapitre II : Le Développement</h3>
-                    <p class="text-gray-400 text-sm mb-6">L'ami Baco déploie ici ses arguments. Copie-colle les points forts de son analyse dans ce bloc.</p>
-                    <div class="h-1 w-full bg-white/10 rounded overflow-hidden">
-                        <div class="h-full bg-baco-glow w-1/3 group-hover:w-full transition-all duration-700"></div>
-                    </div>
-                </div>
-
-                <!-- Carte 3 -->
-                <div class="glass-panel p-8 rounded-2xl reveal hover:-translate-y-2 transition-all duration-300 interactive-element group" style="transition-delay: 200ms;">
-                    <h3 class="text-xl font-bold mb-3 group-hover:text-purple-400 transition-colors">Chapitre III : La Synthèse</h3>
-                    <p class="text-gray-400 text-sm mb-6">La conclusion magistrale. Utilise cet espace pour les recommandations ou la vision future proposée dans le Drive.</p>
-                    <div class="h-1 w-full bg-white/10 rounded overflow-hidden">
-                        <div class="h-full bg-purple-400 w-1/3 group-hover:w-full transition-all duration-700"></div>
-                    </div>
+        <section class="copy-block copy-block--tinted">
+            <div class="copy-block__lead">
+                <p class="eyebrow">Base de données fournie</p>
+                <h2>Des actifs récoltés selon le rythme du vivant.</h2>
+            </div>
+            <div class="copy-block__body">
+                <div class="fact-grid">
+                    <article class="fact-card">
+                        <h3>Salicorne verte bio</h3>
+                        <p>Récoltée manuellement dans les salines de mai à fin juillet.</p>
+                    </article>
+                    <article class="fact-card">
+                        <h3>Salicorne rouge bio</h3>
+                        <p>Issue de la floraison, récoltée à partir du mois d’août.</p>
+                    </article>
+                    <article class="fact-card">
+                        <h3>Macro-algue entéromorpha</h3>
+                        <p>Ramassée au râteau dans les salines au printemps.</p>
+                    </article>
+                    <article class="fact-card">
+                        <h3>Argile marine, sel et fleur de sel</h3>
+                        <p>Prélevés avec finesse et à la main, dans le respect de la saisonnalité.</p>
+                    </article>
                 </div>
             </div>
+        </section>
 
-            <!-- Espace pour le texte intégral ou document profond -->
-            <div class="mt-16 glass-panel rounded-3xl p-8 md:p-16 reveal relative overflow-hidden">
-                <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-baco-accent rounded-full filter blur-[80px] opacity-30"></div>
-                
-                <h3 class="text-2xl md:text-3xl font-bold mb-8 flex items-center">
-                    <svg class="w-8 h-8 mr-4 text-baco-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                    Le Document Intégral
-                </h3>
-                
-                <div class="prose prose-invert prose-lg max-w-none text-gray-300 font-serif leading-loose">
-                    <p>
-                        <em>[Espace de lecture immersif]</em> C'est ici que tu peux coller de longs paragraphes du travail de Baco. La typographie a été choisie pour offrir un confort de lecture optimal, même sur des textes longs.
-                    </p>
-                    <p>
-                        N'hésite pas à utiliser des balises HTML classiques comme des <strong>titres h4</strong>, des listes à puces ou des citations. Le design est prévu pour absorber et magnifier n'importe quel contenu textuel qualitatif. L'association Cloudflare et Digital Ocean assurera une livraison ultra-rapide de ce chef-d'œuvre à tes visiteurs.
-                    </p>
+        <section class="panel panel--portrait">
+            <img
+                src="media/chermiti-mohamed-GrHqA-2GJdU-unsplash.jpg"
+                alt="Gros plan d'une paupière fermée et d'une peau constellée de taches de rousseur."
+                loading="lazy"
+            >
+        </section>
+
+        <section class="copy-block">
+            <div class="copy-block__lead">
+                <p class="eyebrow">Effets recherchés</p>
+                <h2>La peau comme terrain de traduction.</h2>
+            </div>
+            <div class="copy-block__body">
+                <div class="benefit-grid">
+                    <article class="benefit-card">
+                        <h3>Hydratation</h3>
+                        <p>Maintien de l’hydratation cutanée par une matière riche, aqueuse et protectrice.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <h3>Antioxydation</h3>
+                        <p>Des plantes halophytes capables de développer leur propre système de défense.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <h3>Rééquilibrage</h3>
+                        <p>Des actions purifiantes et rééquilibrantes portées par les sédiments et les sels marins.</p>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer / Contact -->
-    <footer id="contact" class="py-12 px-6 border-t border-white/10 bg-baco-dark relative z-10">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-6 md:mb-0 text-center md:text-left">
-                <p class="text-2xl font-bold tracking-tighter">BACO<span class="text-baco-accent">.</span></p>
-                <p class="text-gray-500 text-sm mt-1">Propulsé par Digital Ocean (164.92.220.248) & Cloudflare</p>
+        <section class="panel panel--product-duo">
+            <img
+                src="media/491204653-1100138258818194-1669315162402586685-n.jpg"
+                alt="Deux masques de soin bleus Guérande Cosmétiques photographiés dans une architecture grise minimale."
+                loading="lazy"
+            >
+        </section>
+
+        <section class="copy-block copy-block--narrow">
+            <div class="copy-block__lead">
+                <p class="eyebrow">Positionnement</p>
+                <h2>Passer du sel à la preuve sensible.</h2>
             </div>
-            <div class="flex space-x-6">
-                <!-- Liens fictifs, à remplacer -->
-                <a href="#" class="text-gray-400 hover:text-white transition-colors interactive-element">Drive Original</a>
-                <a href="#" class="text-gray-400 hover:text-white transition-colors interactive-element">LinkedIn de Baco</a>
-                <a href="#" class="text-gray-400 hover:text-white transition-colors interactive-element">Contact</a>
+            <div class="copy-block__body">
+                <p>
+                    Le projet ne doit plus seulement évoquer les marais salants.
+                    Il doit faire sentir une marque scientifique, premium et
+                    précise, sans perdre la douceur du territoire.
+                </p>
+                <p>
+                    C’est pourquoi l’image est repensée ici comme un champ
+                    respirant&nbsp;: grands cadres, lumière juste, peu de signes,
+                    et un texte séparé des visuels pour laisser la matière parler.
+                </p>
             </div>
-        </div>
+        </section>
+
+        <section class="panel panel--product-single">
+            <img
+                src="media/524893804-1186177053547647-8052822903364409943-n.jpg"
+                alt="Un soin visage bleu Guérande Cosmétiques posé sur un plan bleu glacé."
+                loading="lazy"
+            >
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Projet Guérande Cosmétiques.</p>
+        <a href="#top">Revenir au début</a>
     </footer>
-
-    <!-- Scripts pour la magie et l'interactivité -->
-    <script>
-        // 1. CURSEUR PERSONNALISÉ
-        const cursor = document.getElementById('cursor');
-        const interactives = document.querySelectorAll('.interactive-element');
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        interactives.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
-
-        // 2. ANIMATIONS AU SCROLL (Intersection Observer)
-        const reveals = document.querySelectorAll('.reveal');
-        
-        const revealOptions = {
-            threshold: 0.15,
-            rootMargin: "0px 0px -50px 0px"
-        };
-
-        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target);
-            });
-        }, revealOptions);
-
-        reveals.forEach(reveal => {
-            revealOnScroll.observe(reveal);
-        });
-
-        // 3. LA MAGIE DU FOND (Particules via Canvas HTML5)
-        const canvas = document.getElementById('magic-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        let width, height;
-        let particles = [];
-        
-        // Configuration
-        const numParticles = 80;
-        const connectionDistance = 150;
-        let mouse = { x: null, y: null, radius: 150 };
-
-        function initCanvas() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-
-        window.addEventListener('resize', () => {
-            initCanvas();
-            initParticles();
-        });
-
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
-        });
-        
-        window.addEventListener('mouseout', () => {
-            mouse.x = null;
-            mouse.y = null;
-        });
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 2 + 1;
-                this.baseX = this.x;
-                this.baseY = this.y;
-                this.density = (Math.random() * 20) + 1;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-            }
-
-            draw() {
-                ctx.fillStyle = 'rgba(14, 165, 233, 0.5)'; // Glow blue
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.fill();
-            }
-
-            update() {
-                // Déplacement naturel lent
-                this.x += this.vx;
-                this.y += this.vy;
-
-                // Rebond sur les bords
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-
-                // Interaction avec la souris (Répulsion magique)
-                if (mouse.x != null) {
-                    let dx = mouse.x - this.x;
-                    let dy = mouse.y - this.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    let forceDirectionX = dx / distance;
-                    let forceDirectionY = dy / distance;
-                    let maxDistance = mouse.radius;
-                    let force = (maxDistance - distance) / maxDistance;
-                    let directionX = forceDirectionX * force * this.density;
-                    let directionY = forceDirectionY * force * this.density;
-
-                    if (distance < mouse.radius) {
-                        this.x -= directionX;
-                        this.y -= directionY;
-                    }
-                }
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < numParticles; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-                
-                // Connexions (Les "connexions sympathiques")
-                for (let j = i; j < particles.length; j++) {
-                    let dx = particles[i].x - particles[j].x;
-                    let dy = particles[i].y - particles[j].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < connectionDistance) {
-                        let opacityValue = 1 - (distance / connectionDistance);
-                        ctx.strokeStyle = `rgba(99, 102, 241, ${opacityValue * 0.3})`; // Indigo line
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animate);
-        }
-
-        initCanvas();
-        initParticles();
-        animate();
-    </script>
 </body>
 </html>
