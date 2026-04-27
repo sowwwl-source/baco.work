@@ -1,0 +1,7 @@
+name = "guerande-cosmetiques"
+
+main = "main.js"
+compatibility_date = "2026-04-26"
+
+[assets]
+bucket = "./public"

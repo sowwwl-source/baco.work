@@ -7,6 +7,7 @@ Site statique pour L'Œuvre de Baco.
 
 ## Structure
 - `index.html` — Page principale
+- `brand-guide.html` — Guide de marque
 
 ## Déploiement
 Ce site est prêt pour un hébergement statique. Pour ajouter un backend ou automatiser le déploiement, demande à Copilot !
